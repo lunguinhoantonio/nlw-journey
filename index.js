@@ -14,25 +14,7 @@ const formattor = (date) => {
 }
  
 //object
-const task = {
-  name: "Almoço",
-  date: new Date("2024-07-09 10:00"),
-  finished: true
-}
-
-let tasks = [
-  task,
-  {
-    name: 'Academia em grupo',
-    date: new Date("2024-07-09 12:00"),
-    finished: false
-  },
-  {
-    name: 'Gaming session',
-    date: new Date("2024-07-09 16:00"),
-    finished: true
-  },
-]
+let tasks = JSON.parse(localStorage.getItem("tasks")) || []
 
 // tasks = []
 
@@ -121,6 +103,7 @@ const saveTask = (event) => {
   }
 
   tasks = [newTask, ...tasks]
+  localStorage.setItem('tasks', JSON.stringify(tasks))
   refreshTaskList()
 }
 
@@ -175,4 +158,5 @@ const completeTask = (event) => {
     return
   }
   task.finished = !task.finished
+  localStorage.setItem('tasks', JSON.stringify(tasks))
 }
